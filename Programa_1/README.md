@@ -31,11 +31,7 @@
 # Introdu\c{cao ao Problema}
 O presente estudo tem como objetivo simular a dinamica de uma particula esferoidal em um fluido viscoso, sob açao da força peso, empuxo e força de arrasto. A equaçao do movimento e baseada na segunda lei de Newton e contempla o modelo de arrasto linear (Stokes). A particula parte do repouso e tende a velocidade terminal ao longo do tempo. 
 
-\begin{figure}[H]
-    \centering
-    ![Figura](imagens/esquema_exercicio.png)
-    \caption{Esquematizaçao do problema proposto pelo professor.}
-\end{figure}
+
 
 # Modelagem Matematica e Solu\c{cao Analitica}
 O ponto de partida para a modelagem do problema {e} a aplicaçao da Segunda Lei de Newton a particula em movimento dentro de um fluido viscoso. Considerando a força peso, a força de empuxo e a força de arrasto linear (regime de Stokes), a equaçao do movimento {e} descrita por:
@@ -98,28 +94,16 @@ def euler_step(y, h, St):
 # Analise do Erro
 O erro absoluto foi calculado ponto a ponto pela diferença entre a soluçao numerica e a analitica:
 $$
-    \epsilon(t) = \left| y_{\text{Euler}}(t) - y_{\text{analitico}}(t) \right|
+    \epsilon(t) = | y_{Euler}(t) - y_{analitico}(t) |
 $$
 
 # Resultados Graficos
 \vspace{-1em}
-\begin{figure}[H]
-    \centering
-    ![Figura](imagens/grafico_analitico.png)
-    \caption{Soluçao analitica via serie de Taylor com tolerancia e reescrita.}
-\end{figure}
 
-\begin{figure}[H]
-    \centering
-    ![Figura](imagens/grafico_euler.png)
-    \caption{Soluçao numerica via metodo de Euler (h = 0.01).}
-\end{figure}
 
-\begin{figure}[H]
-    \centering
-    ![Figura](imagens/grafico_erro.png)
-    \caption{Erro absoluto entre a soluçao analitica e o metodo de Euler.}
-\end{figure}
+
+
+
 
 # Conclus{ao}  
 A resoluç{a}o do problema proposto demonstrou ser plenamente vi{a}vel por meio de implementaç{o}es num{e}ricas diretas em \texttt{Python}, mesmo sem recorrer a bibliotecas prontas para o c{a}lculo da exponencial. A utilizaç{a}o da s{e}rie de Taylor truncada com crit{e}rio de toler{a}ncia mostrou-se eficaz e computacionalmente est{a}vel, desde que aliada a uma reescrita inteligente da exponencial para evitar problemas num{e}ricos associados {a} representaç{a}o em ponto flutuante (\texttt{float64}). A exportaç{a}o dos dados simulados para um arquivo \texttt{.csv} permitiu a posterior geraç{a}o de gr{a}ficos, favorecendo a visualizaç{a}o dos resultados e a comparaç{a}o entre as soluç{o}es anal{i}tica e num{e}rica. O estudo evidencia a robustez da abordagem proposta e reforça a aplicabilidade de m{e}todos computacionais simples na modelagem de fenomenos f{i}sicos com eficiencia e controle.
