@@ -100,15 +100,11 @@ Euler.](imagens/grafico_erro.png)
 
 # Conclusão
 
-A resolução do problema proposto demonstrou ser plenamente viável por
-meio de implementações numéricas diretas em `Python`, mesmo sem recorrer
-a bibliotecas prontas para o cálculo da exponencial. A utilização da
-série de Taylor truncada com critério de tolerância mostrou-se eficaz e
-computacionalmente estável, desde que aliada a uma reescrita inteligente
-da exponencial para evitar problemas numéricos associados à
-representação em ponto flutuante (`float64`). A exportação dos dados
-simulados para um arquivo `.csv` permitiu a posterior geração de
-gráficos, favorecendo a visualização dos resultados e a comparação entre
-as soluções analítica e numérica. O estudo evidencia a robustez da
-abordagem proposta e reforça a aplicabilidade de métodos computacionais
-simples na modelagem de fenômenos físicos com eficiência e controle.
+A resolução do problema evidenciou a coerência entre a solução analítica
+ e a aproximação numérica obtida pelo método de Euler. A forma analítica,
+ construída a partir da equação diferencial, apresentou um comportamento
+ esperado para sistemas com regime de arrasto linear. A aproximação exponencial
+ por série de Taylor demonstrou-se estável, com erro controlado mediante truncamento
+ adequado.
+
+
