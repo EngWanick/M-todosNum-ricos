@@ -1,16 +1,16 @@
-::: titlepage
-![image](img/unb_bandeira.png){width="4cm"}\
-[Universidade de Brasília]{.smallcaps}\
-[Departamento de Engenharia Mecânica]{.smallcaps}\
-[Programa de Pós-Graduação em Ciências Mecânicas]{.smallcaps}\
+
+![image](img/unb_bandeira.png)
+# Universidade de Brasília\
+**Departamento de Ciências Mecânicas**\
+Programa de Pós-Graduação\
 **Relatório - Dinâmica de Gotas**\
-**Disciplina: Hidrodinâmica de Interface**\
-Professor: Nome do Professor\
+**Disciplina: Métodos Numéricos**\
+Professor: Rafael Gabler Gontijo\
 Data: 2025-03-30\
-**Aluno: Lucas --- Mestrado em Ciências Mecânicas**\
+**Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**\
 :::
 
-# 1. Introdução {#introdução .unnumbered}
+# 1. Introdução
 
 A análise da sedimentação de uma partícula esferoidal sob ação da
 gravidade em um fluido viscoso permite investigar a dinâmica de
@@ -25,7 +25,7 @@ analítica para o caso linear, a solução numérica è realizada por meio do
 método de Runge-Kutta de quarta ordem (RK4), com validação a partir de
 soluções de referência apresentadas na literatura (Sobral et al., 2007).
 
-# 2. Formulação do Problema {#formulação-do-problema .unnumbered}
+# 2. Formulação do Problema
 
 A partícula considerada é esferoidal, com raio $R$ e densidade $\rho_p$,
 imersa em um fluido com viscosidade dinâmica $\mu$ e densidade $\rho_f$.
@@ -43,7 +43,7 @@ quadrática:
 
 $$F_D = \frac{1}{2} C_d \rho_f A v^2, \quad \text{com } A = \pi R^2$$
 
-## 2.1 Adimensionalização {#adimensionalização .unnumbered}
+## 2.1 Adimensionalização
 
 Adota-se a velocidade de Stokes como escala de velocidade:
 $$v_s = \frac{2}{9} \frac{(\rho_p - \rho_f) g R^2}{\mu}$$
@@ -61,7 +61,7 @@ $$St \frac{dy}{d\tau} = 1 - y - \frac{Re_s}{2} y^2$$
 onde $St$ é o número de Stokes e $Re_s$ o Reynolds baseado na velocidade
 de Stokes.
 
-# 3. Solução Analítica {#solução-analítica .unnumbered}
+# 3. Solução Analítica
 
 A solução analítica do modelo linear é:
 
@@ -72,60 +72,60 @@ para estabilidade numérica. A seguir, apresenta-se o comportamento da
 resposta para diferentes $St$:
 
 ![Soluções analíticas para diferentes números de
-Stokes](img/grafico_analitico.png){width="80%"}
+Stokes](img/grafico_analitico.png)
 
 Em seguida, comparam-se os resultados da solução analítica com os
 obtidos pelo método de RK4:
 
 ![Comparativo analítica vs RK4 (St =
-0.1)](img/grafico1_st_0.1.png){width="80%"}
+0.1)](img/grafico1_st_0.1.png)
 
 ![Comparativo analítica vs RK4 (St =
-0.5)](img/grafico1_st_0.5.png){width="80%"}
+0.5)](img/grafico1_st_0.5.png)
 
 ![Comparativo analítica vs RK4 (St =
-1)](img/grafico1_st_1.png){width="80%"}
+1)](img/grafico1_st_1.png)
 
 ![Comparativo analítica vs RK4 (St =
-2)](img/grafico1_st_2.png){width="80%"}
+2)](img/grafico1_st_2.png)
 
 ![Comparativo analítica vs RK4 (St =
-5)](img/grafico1_st_5.png){width="80%"}
+5)](img/grafico1_st_5.png)
 
-# Solução Numérica Linear --- RK4 (Stokes) {#solução-numérica-linear-rk4-stokes .unnumbered}
+# Solução Numérica Linear --- RK4 (Stokes)
 
 O método de Runge-Kutta de quarta ordem foi implementado para resolver a
 EDO linear. A solução apresentou concordância com a solução analítica
 para diferentes valores de $St$ e passos de tempo $h$.
 
 ![Evolução do erro absoluto com refinamento do passo de
-tempo](img/grafico2_erro_stokes_por_h.png){width="80%"}
+tempo](img/grafico2_erro_stokes_por_h.png)
 
-# Solução Numérica com Força Quadrática {#solução-numérica-com-força-quadrática .unnumbered}
+# Solução Numérica com Força Quadrática 
 
 Para regimes com maior inércia, foi adicionada uma componente quadrática
 à equação de movimento. O mesmo método de integração (RK4) foi aplicado,
 com proteção contra overflows e divergências numéricas.
 
 ![Soluções com força quadrática para diferentes
-$Re_s$](img/grafico3_quadratico_res.png){width="80%"}
+$Re_s$](img/grafico3_quadratico_res.png)
 
-# Análise do Erro e Variação do Passo {#análise-do-erro-e-variação-do-passo .unnumbered}
+# Análise do Erro e Variação do Passo
 
 Os gráficos seguintes comparam os erros relativos das soluções numéricas
 em relação à analítica, conforme os parâmetros de malha temporal e
 intensidade do termo quadrático.
 
 ![Erro absoluto da solução quadrática com variação de
-$Re_s$](img/grafico4_erro_quadratico_res.png){width="80%"}
+$Re_s$](img/grafico4_erro_quadratico_res.png)
 
 ![Solução quadrática com diferentes passos
-$h$](img/grafico5_h_quadratico.png){width="80%"}
+$h$](img/grafico5_h_quadratico.png)
 
 ![Erro final para RK4 linear vs passo de
-tempo](img/grafico6_erro_final_stokes_vs_h.png){width="80%"}
+tempo](img/grafico6_erro_final_stokes_vs_h.png)
 
-# 3.1 Validação com modelo de referência {#validação-com-modelo-de-referência .unnumbered}
+# 3.1 Validação com modelo de referência 
 
 A solução numérica com força quadrática foi validada qualitativamente
 pela comparação com a Figura 2 do artigo de Sobral et al. (2007), que
@@ -141,9 +141,9 @@ progressivo em relação à solução linear, conforme demonstrado na
 simulação.
 
 ![Curva de referência retirada de Sobral et al. (2007), Figura
-2](img/figura2_sobral.png){width="65%"}
+2](img/figura2_sobral.png)
 
-## 3.2 Efeitos da Força de Arrasto Quadrática {#efeitos-da-força-de-arrasto-quadrática .unnumbered}
+## 3.2 Efeitos da Força de Arrasto Quadrática
 
 A força de arrasto em fluidodinâmica representa a resistência do fluido
 ao movimento da partícula. No regime laminar (Stokes), essa força é
@@ -177,7 +177,7 @@ os efeitos são:
 Esse comportamento foi reproduzido numericamente e validado com os dados
 de referência.
 
-# 4. Conclusão {#conclusão .unnumbered}
+# 4. Conclusão
 
 O estudo conduzido permitiu explorar a dinâmica de sedimentação de uma
 partícula esferoidal em fluido viscoso sob diferentes condições de
