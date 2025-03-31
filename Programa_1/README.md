@@ -3,7 +3,7 @@
 # Universidade de Brasília\
 **Departamento de Ciências Mecânicas**\
 Programa de Pós-Graduação\
-**Relatório - Dinâmica de Gotas**\
+**Relatório - Sedimentação Fluido Partícula**\
 **Disciplina: Métodos Numéricos**\
 Professor: Rafael Gabler Gontijo\
 Data: 2025-03-30\
