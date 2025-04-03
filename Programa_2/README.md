@@ -26,12 +26,16 @@ definidos para cada função.
 
 # Metodologia
 
-A equação geral para o número de iterações foi utilizada:\
-$$n = \left\lfloor \log_2\left(\frac{x_u - x_l}{\text{tol}}\right) \right\rfloor + 1$$\
+A equação geral para o número de iterações foi utilizada:
+
+$$
+n = \left\lfloor \log_2\left(\frac{x_u - x_l}{\text{tol}}\right) \right\rfloor + 1
+$$
+
 Como o uso de bibliotecas externas foi vetado, funções como $\ln(x)$ e
 $\sin(x)$ foram implementadas por meio de séries de Taylor, com técnicas
 de redução de argumento e mudança de base para garantir estabilidade
-numérica.\
+numérica.
 
 # Implementação
 
@@ -107,17 +111,21 @@ def bisseccao(f, xl, xu, tol):
     return xr, iteracoes
 ```
 
-# Resultados
+## Resultados
 
-Abaixo, tabela comparativa para a função $f_1(x) = -0.5x^2 + 2.5x + 4.5$
-com tolerância $10^{-5}$:
+Abaixo, tabela comparativa para a função:
 
-      Método           Raiz       Iterações           $f$(Raiz)                     Erro final
-  --------------- -------------- ----------- ---------------------------- ------------------------------
-     Bissecção     6.4051342010      19              $\approx$ 0           $\approx 9.5 \times 10^{-6}$
-   Falsa Posição   6.4051231903      12       $\approx 6 \times 10^{-6}$   $\approx 3.6 \times 10^{-6}$
------------------ -------------- ----------- ---------------------------- ------------------------------
-  ->: Comparação entre métodos para $f_1(x)$ :<-
+$$
+f_1(x) = -0.5x^2 + 2.5x + 4.5 \quad \text{com tolerância } 10^{-5}
+$$
+
+| Método         | Raiz         | Iterações | f(Raiz)          | Erro final       |
+|----------------|--------------|-----------|------------------|------------------|
+| Bissecção      | 6.4051342010 | 19        | ≈ 0              | ≈ 9.5 × 10⁻⁶     |
+| Falsa Posição  | 6.4051231903 | 12        | ≈ 6 × 10⁻⁶       | ≈ 3.6 × 10⁻⁶     |
+
+→ Comparação entre métodos para $f_1(x)$
+
 
 # Discussão
 
