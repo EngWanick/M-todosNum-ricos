@@ -1,44 +1,43 @@
-::: titlepage
-![image](img/unb_bandeira.png){width="12cm"}\
-[Universidade de Brasília]{.smallcaps}\
-[Departamento de Ciências Mecânica]{.smallcaps}\
-[Programa de Pós-Graduação]{.smallcaps}\
+![image](img/unb_bandeira.png)\
+**Universidade de Brasília**\
+Departamento de Ciências Mecânicas\
+Programa de Pós-Graduação\
 **Programa 2 -- Cálculo de Raízes: Métodos de Bissecção e Falsa
 Posição**\
 **Disciplina: Métodos Numéricos**\
 Professor: Rafael Gabler Gontijo\
 Data: 2025-04-03\
 **Aluno: Eng. Lucas Wanick --- Mestrando em Engenharia Mecânica**\
-:::
 
-# Introdução {#introdução .unnumbered}
+
+# Introdução
 
 O presente relatório apresenta o desenvolvimento do Programa 2 da
 disciplina de Métodos Numéricos, cujo objetivo é implementar os métodos
 de Bissecção e Falsa Posição para o cálculo de raízes de funções não
 lineares e transcendentais.
 
-# Formulação do Problema {#formulação-do-problema .unnumbered}
+# Formulação do Problema
 
 Foram analisadas cinco funções fornecidas no enunciado, representando
 expressões algébricas com termos polinomiais, logarítmicos e
 trigonométricos. As raízes foram calculadas dentro de intervalos
 definidos para cada função.
 
-# Metodologia {#metodologia .unnumbered}
+# Metodologia
 
-A equação geral para o número de iterações foi utilizada:
-$$n = \left\lfloor \log_2\left(\frac{x_u - x_l}{\text{tol}}\right) \right\rfloor + 1$$
+A equação geral para o número de iterações foi utilizada:\
+$$n = \left\lfloor \log_2\left(\frac{x_u - x_l}{\text{tol}}\right) \right\rfloor + 1$$\
 Como o uso de bibliotecas externas foi vetado, funções como $\ln(x)$ e
 $\sin(x)$ foram implementadas por meio de séries de Taylor, com técnicas
 de redução de argumento e mudança de base para garantir estabilidade
-numérica.
+numérica.\
 
-# Implementação {#implementação .unnumbered}
+# Implementação
 
 A seguir, destacam-se trechos do código implementado.
 
-## Função ln(x) {#função-lnx .unnumbered}
+## Função ln(x)
 
 ``` {.python language="Python"}
 def ln_estavel(x, n=100):
@@ -55,7 +54,7 @@ def ln_estavel(x, n=100):
     return k * ln2 + ln_taylor(x, n)
 ```
 
-## Função sin(x) {#função-sinx .unnumbered}
+## Função sin(x)
 
 ``` {.python language="Python"}
 def sin_taylor(x, n=20):
@@ -73,7 +72,7 @@ def sin_taylor(x, n=20):
     return soma
 ```
 
-## Cálculo das Iterações {#cálculo-das-iterações .unnumbered}
+## Cálculo das Iterações
 
 ``` {.python language="Python"}
 def calcular_max_iter(xu, xl, tol):
@@ -85,7 +84,7 @@ def calcular_max_iter(xu, xl, tol):
     return int(ln_aprox / ln2) + 1
 ```
 
-## Método da Bissecção {#método-da-bissecção .unnumbered}
+## Método da Bissecção
 
 ``` {.python language="Python"}
 def bisseccao(f, xl, xu, tol):
@@ -108,7 +107,7 @@ def bisseccao(f, xl, xu, tol):
     return xr, iteracoes
 ```
 
-# Resultados {#resultados .unnumbered}
+# Resultados
 
 Abaixo, tabela comparativa para a função $f_1(x) = -0.5x^2 + 2.5x + 4.5$
 com tolerância $10^{-5}$:
@@ -117,10 +116,10 @@ com tolerância $10^{-5}$:
   --------------- -------------- ----------- ---------------------------- ------------------------------
      Bissecção     6.4051342010      19              $\approx$ 0           $\approx 9.5 \times 10^{-6}$
    Falsa Posição   6.4051231903      12       $\approx 6 \times 10^{-6}$   $\approx 3.6 \times 10^{-6}$
+----------------- -------------- ----------- ---------------------------- ------------------------------
+  ->: Comparação entre métodos para $f_1(x)$ :<-
 
-  : Comparação entre métodos para $f_1(x)$
-
-# Discussão {#discussão .unnumbered}
+# Discussão
 
 Ambos os métodos apresentaram convergência adequada à tolerância
 estabelecida. O método da falsa posição atingiu a precisão desejada com
@@ -128,7 +127,7 @@ menos iterações, o que reforça sua eficiência para funções com
 comportamento suave. A reescrita de funções matemáticas sem bibliotecas
 não comprometeu a robustez das soluções.
 
-# Conclusão {#conclusão .unnumbered}
+# Conclusão
 
 A implementação dos métodos da bissecção e da falsa posição permitiu a
 obtenção de raízes reais com precisão controlada, conforme os critérios
