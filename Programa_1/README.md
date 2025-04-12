@@ -92,8 +92,7 @@ obtidos pelo método de RK4:
 </p>
 
 <p align="center">
-  <img src="grafico1_st_1.png" alt="Comparativo analítica vs RK4 (St =
-1)" width="500"/>
+  <img src="img/grafico1_st_1.png" alt="Comparativo analítica vs RK4 (St = 1)" width="500"/>
 </p>
 
 <p align="center">
