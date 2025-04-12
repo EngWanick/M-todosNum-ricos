@@ -24,6 +24,36 @@ expressões algébricas com termos polinomiais, logarítmicos e
 trigonométricos. As raízes foram calculadas dentro de intervalos
 definidos para cada função.
 
+1.
+$$
+f_1(x) = -0.5x^2 + 2.5x + 4.5
+$$
+![image](img/f1.png)
+
+2.
+$$
+f_2(x) = 5x^3 - 5x^2 + 6x - 2
+$$
+![image](img/f2.png)
+
+3.
+$$
+f_3(x) = -25 + 82x - 90x^2 + 44x^3 - 8x^4 + 0.7x^5
+$$
+![image](img/f3.png)
+
+4.
+$$
+f_4(x) = \sin(x) - x^3
+$$
+![image](img/f4.png)
+
+5.
+$$
+f_5(x) = \ln(x^4) - 0.7
+$$
+![image](img/f5.png)
+
 # Metodologia
 
 A equação geral para o número de iterações foi utilizada:
