@@ -2,7 +2,7 @@
   <img src="img/unb_bandeira.png" alt="Logo UnB" width="500"/>
 </p>
 
-# Universidade de Brasília\
+# Universidade de Brasília
 **Departamento de Ciências Mecânicas**\
 Programa de Pós-Graduação\
 **Relatório - Sedimentação Fluido Partícula**\
@@ -10,7 +10,6 @@ Programa de Pós-Graduação\
 Professor: Rafael Gabler Gontijo\
 Data: 2025-03-30\
 **Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**\
-:::
 
 # 1. Introdução
 
