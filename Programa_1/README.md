@@ -142,6 +142,10 @@ intensidade do termo quadrático.
   <img src="img/grafico6_erro_final_stokes_vs_h.png" alt="Erro final para RK4 linear vs passo de tempo" width="500"/>
 </p>
 
+<p align="center">
+  <img src="img/grafico7_erro_final_quadratico_vs_res.png" alt="Erro final para RK4 quadrático vs $Re_$s" width="500"/>
+</p>
+
 # 3.1 Validação com modelo de referência 
 
 A solução numérica com força quadrática foi validada qualitativamente
@@ -210,11 +214,15 @@ introdução do termo quadrático: retardo na velocidade de acomodação,
 alteração no valor da velocidade terminal, e comportamento assintótico
 distinto para diferentes valores de $Re_s$.
 
-A variação do passo de integração foi considerada, permitindo observar a
-sensibilidade do erro em relação à discretização temporal. Ainda, a
-expressção analítica para a velocidade terminal no caso quadrático foi
-derivada e comparada com as simulações, destacando a influência
-crescente do arrasto inercial.
+A variação do passo de integração foi considerada, permitindo observar
+a sensibilidade do erro em relação à discretização temporal. Notou-se 
+que o erro absoluto é mais pronunciado nos instantes iniciais da simulação, 
+principalmente para passos maiores, devido à rápida variação do gradiente da 
+solução no início do movimento. À medida que o sistema se aproxima da 
+velocidade terminal, a solução torna-se mais estável e o erro tende a se 
+estabilizar, reduzindo sua taxa de crescimento. Ainda, a expressão analítica para
+a velocidade terminal no caso quadrático foi derivada e comparada com as simulações,
+destacando a influência crescente do arrasto inercial.
 
 As simulações foram qualitativamente comparadas com soluções presentes
 na literatura, evidenciando tendências compatíveis com o comportamento
