@@ -30,7 +30,7 @@ f_1(x) = -0.5x^2 + 2.5x + 4.5
 $$
 
 <p align="center">
-  <img src="img/f1.png" alt="Gráfico da função f₁(x)" width="500"/>
+  <img src="img/f1.png" alt="Gráfico da função f_1(x)" width="500"/>
 </p>
 
 1.
@@ -38,28 +38,39 @@ $$
 f_2(x) = 5x^3 - 5x^2 + 6x - 2
 $$
 
-![Gráfico da função $f_2(x)$](img/f2.png)
+<p align="center">
+  <img src="img/f2.png" alt="Gráfico da função f_2(x)" width="500"/>
+</p>
+
 
 2.
 $$
 f_3(x) = -25 + 82x - 90x^2 + 44x^3 - 8x^4 + 0.7x^5
 $$
 
-![Gráfico da função $f_3(x)$](img/f3.png)
+<p align="center">
+  <img src="img/f3.png" alt="Gráfico da função f_3(x)" width="500"/>
+</p>
+
 
 3.
 $$
 f_4(x) = \sin(x) - x^3
 $$
 
-![Gráfico da função $f_4(x)$](img/f4.png)
+<p align="center">
+  <img src="img/f4.png" alt="Gráfico da função f_4(x)" width="500"/>
+</p>
+
 
 4.
 $$
 f_5(x) = \ln(x^4) - 0.7
 $$
 
-![Gráfico da função $f_5(x)$](img/f5.png)
+<p align="center">
+  <img src="img/f5.png" alt="Gráfico da função f_5(x)" width="500"/>
+</p>
 
 # Metodologia
 
