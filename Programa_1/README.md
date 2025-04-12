@@ -1,5 +1,7 @@
+<p align="center">
+  <img src="img/unb_bandeira.png" alt="Logo UnB" width="500"/>
+</p>
 
-![image](img/unb_bandeira.png)
 # Universidade de Brasília\
 **Departamento de Ciências Mecânicas**\
 Programa de Pós-Graduação\
@@ -71,26 +73,36 @@ Essa solução foi reimplementada via série de Taylor com reestruturação
 para estabilidade numérica. A seguir, apresenta-se o comportamento da
 resposta para diferentes $St$:
 
-![Soluções analíticas para diferentes números de
-Stokes](img/grafico_analitico.png)
+<p align="center">
+  <img src="img/grafico_analitico.png" alt="Soluções analíticas para diferentes números de
+Stokes" width="500"/>
+</p>
 
 Em seguida, comparam-se os resultados da solução analítica com os
 obtidos pelo método de RK4:
 
-![Comparativo analítica vs RK4 (St =
-0.1)](img/grafico1_st_0.1.png)
+<p align="center">
+  <img src="img/grafico1_st_0.1.png" alt="Comparativo analítica vs RK4 (St =
+0.1)" width="500"/>
+</p>
 
-![Comparativo analítica vs RK4 (St =
-0.5)](img/grafico1_st_0.5.png)
+<p align="center">
+  <img src="img/grafico1_st_0.5.png" alt="Comparativo analítica vs RK4 (St =
+0.5" width="500"/>
+</p>
 
-![Comparativo analítica vs RK4 (St =
-1)](img/grafico1_st_1.png)
+<p align="center">
+  <img src="grafico1_st_1.png" alt="Comparativo analítica vs RK4 (St =
+1)" width="500"/>
+</p>
 
-![Comparativo analítica vs RK4 (St =
-2)](img/grafico1_st_2.png)
+<p align="center">
+  <img src="img/grafico1_st_2.png" alt="Comparativo analítica vs RK4 (St = 2)" width="500"/>
+</p>
 
-![Comparativo analítica vs RK4 (St =
-5)](img/grafico1_st_5.png)
+<p align="center">
+  <img src="img/grafico1_st_5.png" alt="Comparativo analítica vs RK4 (St = 5)" width="500"/>
+</p>
 
 # Solução Numérica Linear --- RK4 (Stokes)
 
@@ -98,8 +110,9 @@ O método de Runge-Kutta de quarta ordem foi implementado para resolver a
 EDO linear. A solução apresentou concordância com a solução analítica
 para diferentes valores de $St$ e passos de tempo $h$.
 
-![Evolução do erro absoluto com refinamento do passo de
-tempo](img/grafico2_erro_stokes_por_h.png)
+<p align="center">
+  <img src="img/grafico2_erro_stokes_por_h.png" alt="Evolução do erro absoluto com refinamento do passo de tempo" width="500"/>
+</p>
 
 # Solução Numérica com Força Quadrática 
 
@@ -107,8 +120,10 @@ Para regimes com maior inércia, foi adicionada uma componente quadrática
 à equação de movimento. O mesmo método de integração (RK4) foi aplicado,
 com proteção contra overflows e divergências numéricas.
 
-![Soluções com força quadrática para diferentes
-$Re_s$](img/grafico3_quadratico_res.png)
+<p align="center">
+  <img src="img/grafico3_quadratico_res.png" alt="Soluções com força quadrática para diferentes
+$Re_s$" width="500"/>
+</p>
 
 # Análise do Erro e Variação do Passo
 
@@ -116,14 +131,17 @@ Os gráficos seguintes comparam os erros relativos das soluções numéricas
 em relação à analítica, conforme os parâmetros de malha temporal e
 intensidade do termo quadrático.
 
-![Erro absoluto da solução quadrática com variação de
-$Re_s$](img/grafico4_erro_quadratico_res.png)
+<p align="center">
+  <img src="img/grafico4_erro_quadratico_res.png" alt="Erro absoluto da solução quadrática com variação de $Re_s$" width="500"/>
+</p>
 
-![Solução quadrática com diferentes passos
-$h$](img/grafico5_h_quadratico.png)
+<p align="center">
+  <img src="img/grafico5_h_quadratico.png" alt="Solução quadrática com diferentes passos $h$" width="500"/>
+</p>
 
-![Erro final para RK4 linear vs passo de
-tempo](img/grafico6_erro_final_stokes_vs_h.png)
+<p align="center">
+  <img src="img/grafico6_erro_final_stokes_vs_h.png" alt="Erro final para RK4 linear vs passo de tempo" width="500"/>
+</p>
 
 # 3.1 Validação com modelo de referência 
 
@@ -140,8 +158,9 @@ $Re_s$. Conforme o valor de $Re_s$ aumenta, observa-se um desvio
 progressivo em relação à solução linear, conforme demonstrado na
 simulação.
 
-![Curva de referência retirada de Sobral et al. (2007), Figura
-2](img/figura2_sobral.png)
+<p align="center">
+  <img src="img/figura2_sobral.png" alt="Curva de referência retirada de Sobral et al. (2007), Figura 2" width="500"/>
+</p>
 
 ## 3.2 Efeitos da Força de Arrasto Quadrática
 
