@@ -29,7 +29,9 @@ $$
 f_1(x) = -0.5x^2 + 2.5x + 4.5
 $$
 
-![Gráfico da função $f_1(x)$](img/f1.png)
+<p align="center">
+  <img src="img/f1.png" alt="Gráfico da função f₁(x)" width="500"/>
+</p>
 
 1.
 $$
