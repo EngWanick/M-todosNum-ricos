@@ -1,4 +1,7 @@
-![image](img/unb_bandeira.png)\
+<p align="center">
+  <img src="img/unb_bandeira.png" alt="Logo UnB" width="500"/>
+</p>
+
 **Universidade de Brasília**\
 Departamento de Ciências Mecânicas\
 Programa de Pós-Graduação\
