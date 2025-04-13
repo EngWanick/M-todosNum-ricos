@@ -79,7 +79,7 @@ $f''(x_i)$, $x_{i+1}$, erro absoluto e erro real para cada raiz.
             2            2.01115        0.00024         0.0435    3.80074      2.00009             0.0999                       0.01115
             3            2.00009   $1.8064\times10^8$   0.00038   3.99829    2.000000007           0.0111                 $9.50437\times10^5$
 
-  : Iterações para a raiz dupla de $f(x)$ com $m_1 = m_2 = 2$
+  Iterações para a raiz dupla de $f(x)$ com $m_1 = m_2 = 2$
 
    **Raiz em $x = 3$**                                                                                                
   --------------------- --------- ----------------------- ---------- ---------- ----------- ------------------------- --------------------------------
@@ -89,7 +89,7 @@ $f''(x_i)$, $x_{i+1}$, erro absoluto e erro real para cada raiz.
             2            2.97701          0.00229          -0.99539   -2.01373    2.99999            0.06211                       0.0023
             3            2.99999   $5.3578\times10^{-6}$   -0.99999   -2.00003       3               0.00229               $5.3578\times10^{-6}$
 
-  : Iterações para a raiz de $f(x)$ com aproximação inicial em
+  Iterações para a raiz de $f(x)$ com aproximação inicial em
   $x_0 = 3.3$
 
    **Raiz em $x = 4$**                                                                                                 
@@ -101,7 +101,7 @@ $f''(x_i)$, $x_{i+1}$, erro absoluto e erro real para cada raiz.
             3            3.99824          -0.00703           3.97182   15.94711    3.99994            0.02731                      0.00176
             4            3.99994   $-2.49701\times10^{-5}$   3.9999    15.99881       4                 ---                          ---
 
-  : Iterações para a raiz de $f(x)$ com aproximação inicial em
+  Iterações para a raiz de $f(x)$ com aproximação inicial em
   $x_0 = 4.3$
 
 # Conclusão
