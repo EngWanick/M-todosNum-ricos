@@ -5,7 +5,7 @@
 # Universidade de Brasília
 **Departamento de Ciências Mecânicas**\
 Programa de Pós-Graduação\
-**Relatório - Sedimentação Fluido Partícula**\
+**Cálculo de Raízes: Newton-Raphson Modificado**\
 **Disciplina: Métodos Numéricos**\
 Professor: Rafael Gabler Gontijo\
 Data: 2025-03-30\
