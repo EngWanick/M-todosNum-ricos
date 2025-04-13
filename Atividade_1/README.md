@@ -12,18 +12,6 @@ Data: 2025-03-30\
 **Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**\
 
 
-[image](img/unb_bandeira.png)
-# Universidade de Brasília
-**Departamento de Ciências Mecânica**\
-Programa de Pós-Graduação\
-**Atividade 1**\
-**Cálculo de Raízes: Newton-Raphson Modificado**\
-**Disciplina: Métodos Numéricos**\
-Professor: Rafael Gabler Gontijo\
-Data: 2025-04-13\
-**Aluno: Eng. Lucas Wanick --- Mestrando em Engenharia Mecânica**\
-
-
 # Introdução
 
 A presente atividade tem como objetivo aplicar o método de
