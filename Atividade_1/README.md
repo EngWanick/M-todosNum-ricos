@@ -71,7 +71,7 @@ Os resultados foram obtidos para quatro raízes reais, com ponto inicial
 As tabelas a seguir mostram os valores de $x_i$, $f(x_i)$, $f'(x_i)$,
 $f''(x_i)$, $x_{i+1}$, erro absoluto e erro real para cada raiz.
 
-   **$m_1 = m_2 = 2$**                                                                                              
+   **Raiz em $x = 2$**                                                                                              
   --------------------- --------- -------------------- --------- ---------- ------------- ------------------------- --------------------------------
            $i$            $x_i$          $f(x)$         $f'(x)$   $f''(x)$    $x_{i+1}$    $\epsilon_{\text{abs}}$   $\epsilon_{\text{verdadeiro}}$
             0              2.3           0.1071          0.498     -0.32       2.11105               ---                          0.3
