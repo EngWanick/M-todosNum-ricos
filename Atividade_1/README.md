@@ -9,7 +9,7 @@ Programa de Pós-Graduação\
 **Disciplina: Métodos Numéricos**\
 Professor: Rafael Gabler Gontijo\
 Data: 2025-03-30\
-**Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**\
+**Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**
 
 
 # Introdução
