@@ -1,13 +1,27 @@
+<p align="center">
+  <img src="img/unb_bandeira.png" alt="Logo UnB" width="500"/>
+</p>
+
+# Universidade de Brasília
+**Departamento de Ciências Mecânicas**\
+Programa de Pós-Graduação\
+**Relatório - Sedimentação Fluido Partícula**\
+**Disciplina: Métodos Numéricos**\
+Professor: Rafael Gabler Gontijo\
+Data: 2025-03-30\
+**Aluno: Eng. Lucas Wanick --- Mestrando em Ciências Mecânicas**\
+
+
 [image](img/unb_bandeira.png)
-[Universidade de Brasília]
-[Departamento de Ciências Mecânica]
-[Programa de Pós-Graduação]
-**Atividade 1**
-**Cálculo de Raízes: Newton-Raphson Modificado**
-**Disciplina: Métodos Numéricos**
-Professor: Rafael Gabler Gontijo
-Data: 2025-04-13
-**Aluno: Eng. Lucas Wanick --- Mestrando em Engenharia Mecânica**
+# Universidade de Brasília
+**Departamento de Ciências Mecânica**\
+Programa de Pós-Graduação\
+**Atividade 1**\
+**Cálculo de Raízes: Newton-Raphson Modificado**\
+**Disciplina: Métodos Numéricos**\
+Professor: Rafael Gabler Gontijo\
+Data: 2025-04-13\
+**Aluno: Eng. Lucas Wanick --- Mestrando em Engenharia Mecânica**\
 
 
 # Introdução
@@ -45,7 +59,9 @@ A função escolhida foi:
 
 $$f(x) = (x - 2)^2(x - 3)(x - 4)$$
 
-![Função do Polinômio $f(x)$](img/f(x)_plot.png)
+<p align="center">
+  <img src="img/f(x)_plot.png" alt="Função do Polinômio $f(x)$" width="500"/>
+</p>
 
 Cuja expansão algébrica é:
 
