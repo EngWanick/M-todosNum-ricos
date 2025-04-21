@@ -1,0 +1,202 @@
+# Programa 3:
+# Feito em Python 
+# Métodos de Müller e Newton-Raphson para cálculo de raízes de funções polinomiais ou não-lineares
+# Aluno : Lucas Wanick 242104541
+# Repositório do GitHub -> https://github.com/EngWanick/M-todosNum-ricos/tree/main/Programa_3
+# -------------------------------------------------------------------------------------------
+
+def banner_inicial():
+    print("\n" + "*" * 60)
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("MÉTODOS DE MÜLLER E NEWTON-RAPHSON"))
+    print("*{:^58}*".format("CÁLCULO DE RAÍZES REAIS DE POLINÔMIOS"))
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("P(x) = x^5 - 25x^4 + 230x^3 - 950x^2 + 1689x - 945"))
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("ENG.WANICK"))
+    print("*{:^58}*".format("MÉTODOS NUMÉRICOS"))
+    print("*{:^58}*".format("MESTRADO EM ENGENHARIA MECÂNICA"))
+    print("*{:^58}*".format("UnB"))
+    print("*{:^58}*".format(""))
+    print("*" * 60)
+    input("Pressione ENTER para continuar...\n")
+
+banner_inicial()
+
+def f(x):
+    return x**5 - 25*x**4 + 230*x**3 - 950*x**2 + 1689*x - 945 # Função polinomial dada no enunciado P(x) = x^5 - 25x^4 + 230x^3 - 950x^2 + 1689x - 945;
+def df(x):
+    return 5*x**4 - 100*x**3 + 690*x**2 - 1900*x + 1689 # Derivada da função polinomial dada no enunciado P'(x) = 5x^4 - 100x^3 + 690x^2 - 1900x + 1689;
+
+# === MÉTODO DE NEWTON-RAPHSON ===
+def newton_raphson(f, df, x, tol=1e-5, max_iter=100):
+    iteracoes = []
+    x0 = x
+    for i in range(1, max_iter + 1):
+        fx0 = f(x0)
+        dfx0 = df(x0)
+        if dfx0 == 0:
+            print("Derivada nula. Método falhou.") # Ponto de máximo ou mínimo local, derivada igual a zero;
+            return None, iteracoes
+
+        x1 = x0 - fx0 / dfx0
+        error = abs(x1 - x0) # Erro do Newton-Raphson;
+        iteracoes.append((i+1, x1, f(x1), error))
+
+        if error < tol:
+            return x1, iteracoes
+        x0 = x1
+    return x0, iteracoes
+
+# === MÉTODO DE MÜLLER ===
+def muller(f, x0, x1, x2, tol=1e-5, max_iter=100):
+    iteracoes = []
+    for i in range(max_iter+1):
+        h0 = x1 - x0
+        h1 = x2 - x1
+        delta0 = (f(x1) - f(x0)) / h0
+        delta1 = (f(x2) - f(x1)) / h1
+        a = (delta1 - delta0) / (h1 + h0)
+        b = a * h1 + delta1
+        c = f(x2)
+
+        delta = b**2 - 4*a*c
+        if delta < 0 or a == 0: # Verifica se o discriminante é negativo ou se a == 0;
+            print("Raiz(es) complexa(s) encontrada(s).") # Raiz complexa encontrada durante as iterações. Mude os valores dos chutes iniciais;
+            return None, iteracoes
+        
+        sqrt_delta = delta**0.5
+        denom = b + sqrt_delta # Poderíamos adicionar uma condicional para utlizar o maior módulo da operação entre as duas raízes para estabilidade numérica;
+        if denom == 0: # Mas no enunciado foi solicitado para considerar a raiz positiva apenas
+         return None, iteracoes
+        
+        viete = -2 * c / denom
+        x3 = x2 + viete # Atualiza o valor de x3;
+
+        erro = abs(x3 - x2) # Erro do Müller;
+
+        iteracoes.append((i+1, x3, f(x3), erro)) # Adiciona a iteração à lista de iterações;
+        
+        if erro < tol:
+            return x3, iteracoes
+                        
+        x0, x1, x2 = x1, x2, x3 # Atualiza os valores de x0, x1 e x2 para a próxima iteração;
+
+    return x3, iteracoes # Retorna o último valor de x3 calculado;
+
+# === ENTRADA INTERATIVA DOS CHUTES ===
+resultado = ""
+chutes = []
+
+print("Entre com os chutes iniciais no formato x0, x1, x2 (separados por vírgula) ou 'sair' para encerrar:")
+
+for i in range(1, 6):
+    while True:
+        entrada = input(f"Digite os chutes para a raiz m{i}: ")
+        if entrada.strip().lower() == 'sair':
+            print("Programa encerrado.")
+            exit()
+        else:
+            try:
+                xo, x1, x2 = map(float, entrada.split(','))
+                chutes.append((xo, x1, x2))
+                break
+            except ValueError:
+                print("Entrada inválida. Utilize o formato x0, x1, x2 com número decimais separados por vírgula. Tente novamente.\n")
+    
+
+# === EXECUÇÃO DOS MÉTODOS ===
+for idx, (x0, x1, x2) in enumerate(chutes, start=1): # idx é o índice para identificar cada raiz: m1, m2, m3, m4 ou m5;
+    resultado += f"\n{'='*30} m{idx} {'='*30}\n"
+        
+    #Newton-Raphson
+    chute_nr = (x0 + x1 + x2) / 3 # Como já tivemos muitas entradas para o método de Müller, vamos utilizar a média dos chutes iniciais para o chute do Newton-Raphson;
+    raiz_nr, iter_nr = newton_raphson(f, df, chute_nr)
+    if raiz_nr is None:
+        resultado += f"Newton-Raphson -> Falha para m{idx}.\n"
+        resultado += f"{'Iter':<5}{'x3':>18}{'f(x3)':>18}{'Erro':>18}\n" # Formatação do cabeçalho da tabela;
+        resultado += "-" * 60 + "\n"
+        for i, x, fx, error in iter_nr:
+            resultado += f"{i:<5}{x:>18.10f}{fx:>18.2e}{error:>18.2e}\n" # Adiciona as iterações à tabela de forma organizada;
+    else:
+        resultado += f"Newton-Raphson -> A raiz m{idx} encontrada foi: {raiz_nr:.10f}\n"
+        resultado += f"{'Iter':<5}{'x':>18}{'f(x)':>18}{'Erro':>18}\n"
+        resultado += "-" * 60 + "\n"
+        for i, x, fx, error in iter_nr:
+            resultado += f"{i:<5}{x:>18.10f}{fx:>18.2e}{error:>18.2e}\n"
+    
+    # Müller
+    raiz_muller, iter_muller = muller(f, x0, x1, x2)
+    if raiz_muller is None:
+        resultado += f"\nMüller -> Raiz complexa encontrada com os chutes iciciais para a raiz m{idx}.\n"
+        resultado += f"{'Iter':<5}{'x3':>18}{'f(x3)':>18}{'Erro':>18}\n"
+        resultado += "-" * 60 + "\n"
+        for i, x3, fx3, erro in iter_muller:
+            resultado += f"{i:<5}{x3:>18.10f}{fx3:>18.2e}{erro:>18.2e}\n"
+    else:
+        resultado += f"\nMüller -> A raiz m{idx} encontrada foi: {raiz_muller:.10f}\n"
+        resultado += f"{'Iter':<5}{'x3':>18}{'f(x3)':>18}{'Erro':>18}\n"
+        resultado += "-" * 60 + "\n"
+        for i, x3, fx3, erro in iter_muller:
+            resultado += f"{i:<5}{x3:>18.10f}{fx3:>18.2e}{erro:>18.2e}\n"
+
+print("\nRESULTADO FINAL:")
+print(resultado)
+
+# === PLOTAGEM DE ERRO RELATIVO PERCENTUAL ===
+while True:
+    resposta = input("\nDeseja gerar os gráficos de convergência dos erros relativos? (s/n): ").strip().lower()
+    if resposta in ['s', 'n']:
+        break
+    else:
+        print("Entrada inválida. Digite 's' para sim ou 'n' para não.")
+
+if resposta == 's':
+    import matplotlib.pyplot as plt
+    
+    indices = [0, 2, 4]  # Índices apenas das raízes m1, m3 e m5 para plotagem (0-indexed), uma vez que as raízes m2 e m4 não convergem para x=3 e x=7 em Müller;
+
+    for idx in indices:
+        x0, x1, x2 = chutes[idx]
+        chute_nr = (x0 + x1 + x2) / 3 # Média simples dos chutes;
+        _, iter_nr = newton_raphson(f, df, chute_nr)
+        _, iter_muller = muller(f, x0, x1, x2)
+
+        if len(iter_nr) < 2 or len(iter_muller) < 2:
+            print(f"Não há iterações suficientes para plotar o erro relativo para m{idx + 1}.")
+            continue
+
+        # Newton-Raphson: erro relativo por iteração
+        nr_erro = [
+            (abs(iter_nr[i][1] - iter_nr[i-1][1]) / abs(iter_nr[i][1])) * 100
+            for i in range(1, len(iter_nr))
+        ]
+
+        # Müller: erro relativo por iteração
+        muller_erro = [
+            (abs(iter_muller[i][1] - iter_muller[i - 1][1]) / abs(iter_muller[i][1])) * 100
+            for i in range(1, len(iter_muller))
+        ]
+
+        # Plot
+        plt.figure()
+        plt.plot(range(1, len(muller_erro) + 1), muller_erro, marker='o', label='Müller')
+        plt.plot(range(1, len(nr_erro) + 1), nr_erro, marker='s', label='Newton-Raphson')
+        plt.title(f"Evolução do Erro Relativo Percentual - Raiz m{idx + 1}")
+        plt.xlabel("Iterações")
+        plt.ylabel("Erro Relativo (%)")
+        plt.yscale('log')  # Escala logarítmica para melhor visualização
+        plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+
+#    TESTES teste dos chutes iniciais para a raiz:
+#    0.5, 1.5, 2  # m1 | Raiz Real = 1
+#    2.2, 3, 3.3  # m2 | Raiz Real = 3 -> Não quer convergir de jeito nenhum por Müller; (Boa sorte)
+#    4.7, 5.3, 6  # m3 | Raiz Real = 5
+#    6.3, 7, 7.5  # m4 | Raiz Real = 7 -> Não quer convergir de jeito nenhum por Müller; (Boa sorte)
+#    8.6, 9.5, 10 # m5 | Raiz Real = 9
+# No repositório do GitHub deixei uma tabela programada para estimar os chutes com 9 iterações;
+# Se quiser/precisar de mais iterações, é só sair copiando a ÚLTIMA tabela e seguir a lógica, que os cálculos são reproduzidos automaticamente;
