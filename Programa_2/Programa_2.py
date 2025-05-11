@@ -1,5 +1,28 @@
 # Programa 2: Métodos de Bissecção e Falsa Posição para cálculo de raízes
 
+
+def banner_inicial():
+    print("\n" + "*" * 60)
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("MÉTODOS DA BISSECÇÃO E FALSA POSIÇÃO"))
+    print("*{:^58}*".format("CÁLCULO DE RAÍZES DE POLINÔMIOS"))
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("f1(x) = -0.5 * x**2 + 2.5 * x + 4.5"))
+    print("*{:^58}*".format("f2(x) = 5x³ - 5x² + 6x - 2"))
+    print("*{:^58}*".format("f3(x) = -25 + 82x - 90x² + 44x³ - 8x⁴ + 0.7x"))
+    print("*{:^58}*".format("f4(x) = sin(x) - x³"))
+    print("*{:^58}*".format("f5(x) = ln(x⁴) - 0.7"))
+    print("*{:^58}*".format(""))
+    print("*{:^58}*".format("ENG.WANICK"))
+    print("*{:^58}*".format("MÉTODOS NUMÉRICOS"))
+    print("*{:^58}*".format("MESTRADO EM ENGENHARIA MECÂNICA"))
+    print("*{:^58}*".format("UnB"))
+    print("*{:^58}*".format(""))
+    print("*" * 60)
+    input("Pressione ENTER para continuar...\n")
+
+banner_inicial()
+
 # === FUNÇÕES NUMÉRICAS FUNDAMENTAIS ===
 # Cáculo da função seno usando uma expanção da série de Taylor;
 def sin_taylor(x, n=20):

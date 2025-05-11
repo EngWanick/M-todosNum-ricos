@@ -2,8 +2,8 @@
 
 REM === Caminhos ===
 SET PYTHON_EXE=C:\Program Files\Python312\python.exe
-SET SIMULADOR=E:\ProgramData\Programa_1\Programa_1\sedimentacao.py
-SET GRAFICOS=E:\ProgramData\Programa_1\Programa_1\gerar_graficos.py
+SET SIMULADOR=D:\Engenharia Mecânica\Mestrado\2º Sem\MetNum\M-todosNum-ricos\Programa_1\sedimentacao.py
+SET GRAFICOS=D:\Engenharia Mecânica\Mestrado\2º Sem\MetNum\M-todosNum-ricos\Programa_1\gerar_graficos.py
 
 REM === Executa a simulação ===
 echo Iniciando simulação numérica...
