@@ -299,6 +299,59 @@ A implementação em Python segue boas práticas de modularização, vetorizando
     (x^*, y^*) = (0.96758, 0.65586), \quad f(x^*, y^*) \approx 4.344006
 \end{equation*}
 
+\subsection*{Análise da Hessiana no Ponto Ótimo}
+
+Seja $\vec{x}^* = (x^*, y^*) = (0{,}967580,\ 0{,}655860)$ o ponto ótimo encontrado. Avaliamos a matriz Hessiana de $f$ nesse ponto:
+
+\[
+\mathbf{H}(x^*, y^*) = 
+\begin{bmatrix}
+2 - 24(x^*)^2 & 2 \\
+2 & -6
+\end{bmatrix}
+\]
+
+Substituindo $x^* \approx 0{,}967580$, obtemos:
+
+\[
+\begin{aligned}
+2 - 24(x^*)^2 &\approx 2 - 24 \cdot (0{,}967580)^2 \\
+&\approx 2 - 24 \cdot 0{,}936227 \\
+&\approx 2 - 22{,}469 \\
+&\approx -20{,}469
+\end{aligned}
+\]
+
+Portanto, a Hessiana no ponto crítico é aproximadamente:
+
+\[
+\mathbf{H}(x^*, y^*) \approx
+\begin{bmatrix}
+-20{,}469 & 2 \\
+2 & -6
+\end{bmatrix}
+\]
+
+Para classificar o ponto crítico, calculamos os autovalores da matriz:
+
+\[
+\lambda_{1,2} = 
+\frac{
+\operatorname{tr}(\mathbf{H}) \,\pm\, 
+\sqrt{\operatorname{tr}(\mathbf{H})^{2}\;-\;4\,\operatorname{det}(\mathbf{H})}
+}{2}
+\]
+
+com
+
+\[
+\operatorname{tr}(\mathbf{H}) = -20{,}469 - 6 = -26{,}469, \quad
+\det(\mathbf{H}) = (-20{,}469)(-6) - 2 \cdot 2 = 122{,}814 - 4 = 118{,}814
+\]
+
+Como o determinante é positivo e o traço é negativo, temos dois autovalores reais negativos. Logo, a matriz Hessiana é definida negativa e, portanto, $\vec{x}^*$ é um ponto de \textbf{máximo local}.
+
+\newpage
 \appendix
 \section*{Apêndice A — Estrutura e Documentação do \texttt{programa\_6.py}}
 \addcontentsline{toc}{section}{Apêndice A — Estrutura e Documentação do \texttt{programa\_6.py}}
