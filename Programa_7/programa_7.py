@@ -1,0 +1,171 @@
+# ============================================================
+#   PROGRAMA 7 - INTEGRAÇÃO NUMÉRICA 2D POR NEWTON-COTES
+#   Métodos implementados:
+#   1) REGRA DE TRAPÉZIO
+#   2) REGRA 1/3 DE SIMPSON
+#   3) REGRA 3/8 DE SIMPSON
+# ============================================================
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def banner():
+    print("\n" + "="*66)
+    print("||{:^62}||".format(""))
+    print("||{:^62}||".format("PROGRAMA 7"))
+    print("||{:^62}||".format("INTEGRAÇÃO NUMÉRICA 2D"))
+    print("||{:^62}||".format("NEWTON-COTES"))
+    print("||{:^62}||".format("t(x,y) = 2xy + 2x - x^2 - 2y^2 + 72"))
+    print("||{:^62}||".format("1) REGRA DE TRAPÉZIO"))
+    print("||{:^62}||".format("2) REGRA 1/3 DE SIMPSON"))
+    print("||{:^62}||".format("3) REGRA 3/8 DE SIMPSON"))
+    print("||{:^62}||".format("ENG. LUCAS WANICK  —  MESTRADO EM ENG. MECÂNICA • UnB"))
+    print("||{:^62}||".format(""))
+    print("="*66 + "\n")
+
+banner()
+
+# === CONFIGURAÇÕES GERAIS ===
+T_EXATA = 58.6666666666667
+ARQUIVO_MALHAS = "malhas_T.txt"
+valores_n = [7, 13, 19, 25, 31, 37, 43]
+
+# === FUNÇÃO T(x, y) ===
+def T(x, y):
+    return 2*x*y + 2*x - x**2 - 2*y**2 + 72
+
+# === ETAPA 1: GERAR ARQUIVO DE MALHAS ===
+def gerar_arquivo_malhas(nome_arquivo):
+    with open(nome_arquivo, 'w') as f:
+        f.write("n\tx\ty\tT(x,y)\tErro_Absoluto\n")
+        for n in valores_n:
+            x_vals = np.linspace(0, 8, n)
+            y_vals = np.linspace(0, 6, n)
+            X, Y = np.meshgrid(x_vals, y_vals, indexing='ij')
+            T_vals = T(X, Y)
+            erro = abs(np.mean(T_vals) - T_EXATA)
+            for i in range(n):
+                for j in range(n):
+                    f.write(f"{n}\t{X[i,j]:.4f}\t{Y[i,j]:.4f}\t{T_vals[i,j]:.4f}\t{erro:.6f}\n")
+    print(f"[OK] Arquivo '{nome_arquivo}' gerado.")
+
+# === ETAPA 2: LER O ARQUIVO E ORGANIZAR AS MALHAS ===
+def ler_malhas_do_txt(arquivo):
+    data = pd.read_csv(arquivo, sep='\t')
+    grupos = {}
+    for n in data['n'].unique():
+        grupo = data[data['n'] == n]
+        n_int = int(n)
+        x_vals = grupo['x'].values.reshape((n_int, n_int))
+        y_vals = grupo['y'].values.reshape((n_int, n_int))
+        T_vals = grupo['T(x,y)'].values.reshape((n_int, n_int))
+        grupos[n_int] = {'x': x_vals, 'y': y_vals, 'T': T_vals}
+    return grupos
+
+# === MÉTODO: TRAPÉZIO 2D ===
+def integrar_trapezio_2d(T, a, b, c, d):
+    n, m = T.shape
+    hx = (b - a) / (n - 1)
+    hy = (d - c) / (m - 1)
+    total = 0
+    for i in range(n):
+        for j in range(m):
+            peso = 1
+            if i in [0, n-1]: peso *= 0.5
+            if j in [0, m-1]: peso *= 0.5
+            total += peso * T[i, j]
+    return (hx * hy * total) / ((b - a) * (d - c))
+
+# === MÉTODO: SIMPSON 1/3 2D ===
+def integrar_simpson_1_3_2d(T, a, b, c, d):
+    n, m = T.shape
+    if (n - 1) % 2 != 0 or (m - 1) % 2 != 0:
+        return np.nan  # Não aplicável
+    hx = (b - a) / (n - 1)
+    hy = (d - c) / (m - 1)
+    total = 0
+    for i in range(n):
+        for j in range(m):
+            coef_x = 4 if i % 2 != 0 else 2
+            coef_y = 4 if j % 2 != 0 else 2
+            if i in [0, n-1]: coef_x = 1
+            if j in [0, m-1]: coef_y = 1
+            total += coef_x * coef_y * T[i, j]
+    integral = (hx * hy / 9) * total
+    return integral / ((b - a) * (d - c))
+
+# === MÉTODO: SIMPSON 3/8 2D ===
+def integrar_simpson_3_8_2d(T, a, b, c, d):
+    n, m = T.shape
+    if (n - 1) % 3 != 0 or (m - 1) % 3 != 0:
+        return np.nan  # Não aplicável
+    hx = (b - a) / (n - 1)
+    hy = (d - c) / (m - 1)
+    total = 0
+    for i in range(n):
+        for j in range(m):
+            if i == 0 or i == n - 1:
+                coef_x = 1
+            elif i % 3 == 0:
+                coef_x = 2
+            else:
+                coef_x = 3
+
+            if j == 0 or j == m - 1:
+                coef_y = 1
+            elif j % 3 == 0:
+                coef_y = 2
+            else:
+                coef_y = 3
+
+            total += coef_x * coef_y * T[i, j]
+    integral = (3 * hx * 3 * hy / 64) * total
+    return integral / ((b - a) * (d - c))
+
+# === ETAPA 4: CÁLCULO DAS TEMPERATURAS E ERROS ===
+def calcular_temperaturas_medias(grupos, T_exata):
+    resultados = []
+    for n, dados in grupos.items():
+        Tmat = dados['T']
+        t_trap = integrar_trapezio_2d(Tmat, 0, 8, 0, 6)
+        t_simp_1_3 = integrar_simpson_1_3_2d(Tmat, 0, 8, 0, 6)
+        t_simp_3_8 = integrar_simpson_3_8_2d(Tmat, 0, 8, 0, 6)
+        resultados.append({
+            'n': n,
+            'T_trapezio': t_trap,
+            'Erro_trapezio': abs(t_trap - T_exata),
+            'T_simpson_1_3': t_simp_1_3,
+            'Erro_simp_1_3': abs(t_simp_1_3 - T_exata) if not np.isnan(t_simp_1_3) else np.nan,
+            'T_simpson_3_8': t_simp_3_8,
+            'Erro_simp_3_8': abs(t_simp_3_8 - T_exata) if not np.isnan(t_simp_3_8) else np.nan
+        })
+    return pd.DataFrame(resultados).sort_values(by='n')
+
+# === ETAPA 5: PLOTAGEM FINAL ===
+def plotar_resultado(df):
+    plt.figure(figsize=(10,6))
+    plt.plot(df['n'], df['T_trapezio'], 'o-', label='Trapézio')
+    plt.plot(df['n'], df['T_simpson_1_3'], 's-', label='Simpson 1/3')
+    plt.plot(df['n'], df['T_simpson_3_8'], 'd-', label='Simpson 3/8')
+    plt.axhline(y=T_EXATA, color='r', linestyle='--', label='T_exata')
+    plt.xlabel('n (resolução da malha)')
+    plt.ylabel('Temperatura média')
+    plt.title('Comparação dos métodos de integração 2D')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+# === EXECUÇÃO PRINCIPAL ===
+if __name__ == "__main__":
+    gerar_arquivo_malhas(ARQUIVO_MALHAS)
+    grupos = ler_malhas_do_txt(ARQUIVO_MALHAS)
+    df_result = calcular_temperaturas_medias(grupos, T_EXATA)
+
+    # Exibir tabela com os erros
+    print("\nTabela de Resultados:")
+    print(df_result.to_string(index=False, float_format='{:0.6f}'.format))
+
+    # Plotar gráfico comparativo
+    plotar_resultado(df_result)

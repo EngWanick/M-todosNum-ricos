@@ -1,0 +1,268 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, array, bm, geometry, booktabs, siunitx, graphicx, colortbl, parskip, xcolor}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
+\geometry{a4paper, margin=2.5cm}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\tiny,
+    language=Python
+}
+
+% Cabeçalho
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{UnB}
+\lhead{Departamento de Ci\^encias Mec\^anicas}
+\cfoot{\thepage}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+% Capa
+\begin{titlepage}
+    \centering
+    \includegraphics[width=12cm]{img/unb_bandeira.png} \\
+    \vspace{1cm}
+    \textsc{\Large Universidade de Bras\'ilia} \\
+    \textsc{Departamento de Ciências Mec\^anicas} \\
+    \textsc{Programa de P\'os-Gradua\c{c}\~ao} \\
+    \vfill
+    {\Large\bfseries Atividade 5} \\
+    \vspace{0.5cm}
+    {\Large\bfseries Métodos Numéricos de Otimização} \\
+    {\Large\bfseries SIMPLEX} \\
+    \vspace{0.5cm}
+    \textbf{Disciplina: M\'etodos Num\'ericos} \\
+    Professor: Dr. Rafael Gabler Gontijo \\
+    \vfill
+    \textbf{Aluno: Eng. Lucas Wanick — Mestrando em Engenharia Mec\^anica} \\
+    \vspace{0.5cm}
+        \today \\
+\end{titlepage}
+
+\section*{Enunciado 1 - Interpretação da Tabela Simplex}
+
+\section*{Resolução do Enunciado 1 - Método Simplex}
+
+Nesta primeira parte da atividade, foi solicitado resolver um problema de maximização via Método Simplex. A seguir, é apresentada as três tabelas principais que compõem a sequência de iterações do método.
+
+\subsection*{Iteração 0 - Tabela Inicial}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|ccccccc|c|c}
+\textbf{Básicas} & Z & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & $s_4$ & \textbf{Solução} & \textbf{Interseção} \\
+\hline
+Z & 1   & 0 & -55 & 0 & 15 & 0 & 0 & 1200 & -- \\
+$s_1$ & 0 & 0 & 5{,}4 & 1 & -0{,}7 & 0 & 0 & 21 & 3{,}889 \\
+$x_1$ & 0 & 1 & 0{,}8 & 0 & 0{,}1 & 0 & 0 & 8 & 10 \\
+$s_3$ & 0 & 0 & -0{,}8 & 0 & -0{,}1 & 1 & 0 & 1 & -1{,}25 \\
+$s_4$ & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 6 & 6 \\
+\end{tabular}
+\end{center}
+
+\noindent
+Nesta tabela, a variável $x_2$ possui o menor coeficiente negativo na função objetivo ($-55$), logo é selecionada para entrar na base. Calculamos as razões (Solução / Coluna de $x_2$) para as linhas com coeficientes positivos em $x_2$, obtendo:
+
+\[
+\text{Razões:} \quad \frac{21}{5{,}4} \approx 3{,}889, \quad \frac{8}{0{,}8} = 10
+\]
+
+A menor razão ocorre na linha de $s_1$, que é então a variável que sai da base.
+
+\subsection*{Iteração 1 - Após entrada de $x_2$ e saída de $s_1$}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|ccccccc|c|c}
+\textbf{Básicas} & Z & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & $s_4$ & \textbf{Solução} & \textbf{Interseção} \\
+\hline
+Z  & 1 & 0 & -55 & 0 & 15 & 0 & 0 & 1200 & ? \\
+$x_2$ & 0 & 0 & 1 & 0{,}1852 & -0{,}1296 & 0 & 0 & 3{,}889 & ? \\
+$x_1$ & 0 & 1 & 0{,}8 & 0 & 0{,}1 & 0 & 0 & 8 & ? \\
+$s_3$ & 0 & 0 & -0{,}8 & 0 & -0{,}1 & 1 & 0 & 1 & ? \\
+$s_4$ & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 6 & ? \\
+\end{tabular}
+\end{center}
+
+\noindent
+Nesta iteração, todas as variáveis da função objetivo (linha Z) têm coeficientes não negativos. Portanto, atingimos a solução ótima.
+
+\subsection*{Iteração Final - Solução Ótima}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|ccccccc|c}
+\textbf{Básicas} & Z & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & $s_4$ & \textbf{Solução} \\
+\hline
+Z & 1  & 0 & 0 & 10{,}186 & 7{,}872 & 0 & 0 & 1413{,}895 \\
+$x_2$ & 0 & 0 & 1 & 0{,}1852 & -0{,}1296 & 0 & 0 & 3{,}889 \\
+$x_1$ & 0 & 1 & 0 & -0{,}1482 & 0{,}2037 & 0 & 0 & 4{,}8888 \\
+$s_3$ & 0 & 0 & 0 & 0 & -0{,}2037 & 1 & 0 & 4{,}111 \\
+$s_4$ & 0 & 0 & 0 & -0{,}1852 & 0{,}1296 & 0 & 1 & 2{,}111 \\
+\end{tabular}
+\end{center}
+
+\subsection*{Critério de Parada}
+
+O método Simplex atinge o ponto ótimo quando todos os coeficientes da linha da função objetivo (Z) se tornam nulos ou positivos. Isso significa que não há mais direção viável que permita o aumento da função objetivo, e, portanto, a solução encontrada é a melhor possível dentro da região factível.
+
+\noindent
+Solução ótima final: $\boxed{Z = 1413{,}895}$ com $x_1 = 4{,}8888$, $x_2 = 3{,}889$.
+
+
+\section*{Enunciado 2}
+\section*{Introdução}
+
+Faremos a modelagem e solução de um problema de programação linear voltado à distribuição ótima da geração de energia elétrica a partir de quatro fontes renováveis no contexto brasileiro: solar fotovoltaica, eólica onshore, biomassa e pequenas centrais hidrelétricas (PCH). O objetivo é minimizar o custo total de geração (LCOE) respeitando restrições operacionais e ambientais realistas, com base em dados extraídos de relatórios técnicos da EPE (Empresa de Pesquisa Energética), IEA (International Energy Agency), IPCC (Intergovernmental Panel on Climate Change), e documentos oficiais brasileiros como o Plano Decenal de Expansão de Energia (PDE).
+
+A modelagem considera os custos nivelados de geração elétrica (em R\$/MWh), as emissões de CO$_2$ equivalente por MWh com base em Análise do Ciclo de Vida (ACV), os fatores de capacidade médios e a produção semanal típica por MW instalado. Tais parâmetros foram utilizados para construir uma função objetivo e um conjunto de restrições coerentes com a realidade brasileira.
+
+A ferramenta computacional utilizada para a resolução do problema foi a biblioteca \texttt{scipy.optimize.linprog}, com o solver HiGHS, que permite a aplicação eficiente de algoritmos simplex e interior point em problemas lineares de média e grande escala. Os resultados obtidos fornecem uma estratégia de despacho energético ótima que atende à demanda semanal de 1000 MWh, respeitando o teto de emissão de 30.000 kgCO$_2$-eq e garantindo participação expressiva de fontes renováveis de baixa emissão.
+
+As fontes e dados utilizados para embasamento incluem:
+
+\begin{itemize}
+    \item EPE - Caderno de Preços de Referência para Geração (2023);
+    \item IPCC AR5 e relatórios de ciclo de vida energético (2014 e 2021);
+    \item IEA World Energy Outlook (edições 2022 e 2023);
+    \item Plano Decenal de Expansão Energética 2032 (PDE 2032);
+    \item NDC Brasil (Contribuição Nacionalmente Determinada - compromisso com a neutralidade de carbono até 2050).
+\end{itemize}
+
+\section*{Formulação Matemática do Problema}
+
+Sejam as variáveis de decisão:
+
+\begin{itemize}
+  \item $x_1$: quantidade de energia solar gerada (em MWh/semana)
+  \item $x_2$: quantidade de energia eólica gerada (em MWh/semana)
+  \item $x_3$: quantidade de energia de biomassa gerada (em MWh/semana)
+  \item $x_4$: quantidade de energia gerada por PCH (em MWh/semana)
+\end{itemize}
+
+A função objetivo representa o custo total de geração semanal:
+
+\[
+\text{Min } Z = 149x_1 + 129x_2 + 247x_3 + 193x_4
+\]
+
+Sujeita às seguintes restrições:
+
+\begin{align*}
+\text{(R1) Demanda mínima de energia:} &\quad x_1 + x_2 + x_3 + x_4 \geq 1000 \\
+\text{(R2) Limite solar:} &\quad x_1 \leq 300 \\
+\text{(R3) Limite eólica:} &\quad x_2 \leq 400 \\
+\text{(R4) Limite biomassa:} &\quad x_3 \leq 500 \\
+\text{(R5) Limite PCH:} &\quad x_4 \leq 450 \\
+\text{(R6) Emissão de CO$_2$-eq:} &\quad 48x_1 + 11x_2 + 230x_3 + 24x_4 \leq 30000 \\
+\text{(R7) Meta de renováveis limpas:} &\quad x_1 + x_2 \geq 350 \\
+\text{(R8) Não negatividade:} &\quad x_i \geq 0, \text{ para } i = 1,2,3,4
+\end{align*}
+
+\subsection*{Forma padrão para o solver (linprog)}
+
+A função \texttt{linprog} exige que todas as restrições estejam na forma $A_{ub}x \leq b_{ub}$. Assim, as restrições R1 e R7 são multiplicadas por $-1$:
+
+\begin{align*}
+\text{(R1*)} &\quad -x_1 - x_2 - x_3 - x_4 \leq -1000 \\
+\text{(R7*)} &\quad -x_1 - x_2 \leq -350
+\end{align*}
+
+\section*{Sistema Linear}
+
+\textbf{Função objetivo (vetor c):}
+\[
+c = \begin{bmatrix}
+149 & 129 & 247 & 193
+\end{bmatrix}
+\]
+
+\textbf{Matriz das restrições (A\_ub):}
+\[
+A_{ub} =
+\begin{bmatrix}
+ -1 & -1 & -1 & -1 \\
+  1 &  0 &  0 &  0 \\
+  0 &  1 &  0 &  0 \\
+  0 &  0 &  1 &  0 \\
+  0 &  0 &  0 &  1 \\
+ 48 & 11 &230 & 24 \\
+ -1 & -1 &  0 &  0
+\end{bmatrix}
+\quad
+b_{ub} =
+\begin{bmatrix}
+-1000 \\ 300 \\ 400 \\ 500 \\ 450 \\ 30000 \\ -350
+\end{bmatrix}
+\]
+
+
+\section*{Implementação Computacional (Python)}
+
+\begin{verbatim}
+import numpy as np
+from scipy.optimize import linprog
+
+c = np.array([149, 129, 247, 193])
+A_ub = np.array([
+    [-1, -1, -1, -1],
+    [ 1,  0,  0,  0],
+    [ 0,  1,  0,  0],
+    [ 0,  0,  1,  0],
+    [ 0,  0,  0,  1],
+    [48, 11, 230, 24],
+    [-1, -1, 0, 0]
+])
+b_ub = np.array([
+    -1000,
+    300,
+    400,
+    500,
+    450,
+    30000,
+    -350
+])
+
+res = linprog(c, A_ub=A_ub, b_ub=b_ub, method='highs')
+print(res)
+\end{verbatim}
+
+\section*{Resultados Obtidos}
+
+\begin{itemize}
+    \item Status da Otimização: \textbf{Ótima (convergência)}.
+    \item Custo Total Mínimo: \textbf{R\$ 154.200,00}
+    \item Geração ótima por fonte:
+    \begin{itemize}
+        \item Solar: $x_1 = 300$ MWh
+        \item Eólica: $x_2 = 400$ MWh
+        \item Biomassa: $x_3 = 0$ MWh
+        \item PCH: $x_4 = 300$ MWh
+    \end{itemize}
+    \item Emissões totais de CO$_2$-eq:
+    \[
+    48 \cdot 300 + 11 \cdot 400 + 230 \cdot 0 + 24 \cdot 300 = 26.000 \text{ kg CO$_2$-eq.} \leq 30.000
+    \]
+    \item Total gerado: $300 + 400 + 0 + 300 = 1000$ MWh (atende à demanda) $\textbf{(Atendido)}$
+    \item Meta de renováveis limpas: $x_1 + x_2 = 700$ MWh $\geq$ 350 $\quad$ $\textbf{(Atendido)}$
+\end{itemize}
+
+\end{document}
