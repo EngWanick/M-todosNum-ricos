@@ -145,7 +145,7 @@ masked_T_plot = np.flipud(masked_T)
 cmap = cm.get_cmap('plasma').copy()
 cmap.set_bad(color='white')
 
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(5, 8))
 mesh = plt.pcolormesh(masked_T_plot, cmap=cmap, shading='auto')
 plt.title("Distribuição de Temperatura (°C)")
 plt.xlabel("j (coluna)")
