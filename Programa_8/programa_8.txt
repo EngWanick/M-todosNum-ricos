@@ -11,19 +11,6 @@ from matplotlib import cm
 from scipy.sparse import lil_matrix
 from scipy.sparse.linalg import spsolve
 
-def banner():
-    print("\n" + "="*66)
-    print("||{:^62}||".format(""))
-    print("||{:^62}||".format("PROGRAMA 8"))
-    print("||{:^62}||".format("EQUÇÕES DIFERENCIAIS"))
-    print("||{:^62}||".format("TRANFERÊNCIA DE CALOR EM REGIME PERMANENTE"))
-    print("||{:^62}||".format("GEOMETRIA COMPLEXA"))
-    print("||{:^62}||".format("ENG. LUCAS WANICK  —  MESTRADO EM ENG. MECÂNICA • UnB"))
-    print("||{:^62}||".format(""))
-    print("="*66 + "\n")
-
-banner()
-
 # -----------------------------
 # 1. Função para gerar malha_tipo
 # -----------------------------
