@@ -1,0 +1,142 @@
+# ============================================================
+#   PROGRAMA 8 - EQUÇÕES DIFERENCIAIS
+#   TRANFERÊNCIA DE CALOR EM REGIME PERMANENTE - GEOMETRIA COMPLEXA
+#   LINK DO REPOSITÓRIO DO GITHUB: https://github.com/EngWanick/M-todosNum-ricos/tree/main/Programa_7
+# ============================================================
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from scipy.sparse import lil_matrix
+from scipy.sparse.linalg import spsolve
+
+# -----------------------------
+# 1. Função para gerar malha_tipo
+# -----------------------------
+def gerar_malha_tipo(n, L=1.50, H=2.50, R=0.25):
+    dx = L / (n - 1)
+    dy = H / (n - 1)
+    malha_tipo = np.full((n, n), 'I', dtype=str)
+
+    for i in range(n):
+        for j in range(n):
+            x = j * dx
+            y = H - i * dy
+
+            # Cantos adiabáticos
+            if x < R and y > (H - R):
+                if (x - R)**2 + (y - (H - R))**2 > R**2:
+                    malha_tipo[i, j] = 'A'
+                    continue
+            if x > (L - R) and y < R:
+                if (x - (L - R))**2 + (y - R)**2 > R**2:
+                    malha_tipo[i, j] = 'A'
+                    continue
+
+            # Bordas Dirichlet
+            if i == 0 and malha_tipo[i, j] != 'A':
+                malha_tipo[i, j] = 'D'
+                continue
+            if i == n - 1 and malha_tipo[i, j] != 'A':
+                malha_tipo[i, j] = 'D'
+                continue
+
+            # Bordas Neumann
+            if j == 0 and malha_tipo[i, j] != 'A':
+                malha_tipo[i, j] = 'N'
+                continue
+            if j == n - 1 and malha_tipo[i, j] != 'A':
+                malha_tipo[i, j] = 'N'
+                continue
+
+    return malha_tipo
+
+# -----------------------------
+# 2. Solver com matriz esparsa
+# -----------------------------
+def solver_conducao_sparse(n, T_sup=55, T_inf=45, q_left=250, q_right=210, 
+                           L=1.50, H=2.50, R=0.25, k_cond=71):
+    
+    dx = L / (n - 1)
+    #dy = H / (n - 1)
+    
+    malha_tipo = gerar_malha_tipo(n, L, H, R)
+    
+    # Mapeamento dos nós internos
+    mapa_idx = -np.ones((n, n), dtype=int)
+    contador = 0
+    for i in range(n):
+        for j in range(n):
+            if malha_tipo[i, j] == 'I':
+                mapa_idx[i, j] = contador
+                contador += 1
+    N_unk = contador
+
+    # Matriz esparsa LIL
+    A = lil_matrix((N_unk, N_unk))
+    b = np.zeros(N_unk)
+
+    for i in range(n):
+        for j in range(n):
+            if malha_tipo[i, j] != 'I':
+                continue
+
+            k = mapa_idx[i, j]
+            A[k, k] = -4
+
+            vizinhos = [((i-1, j), -1), ((i+1, j), -1), ((i, j-1), -1), ((i, j+1), -1)]
+
+            for (vi, vj), _ in vizinhos:
+                if 0 <= vi < n and 0 <= vj < n:
+                    tipo_viz = malha_tipo[vi, vj]
+                    if tipo_viz == 'I':
+                        A[k, mapa_idx[vi, vj]] = 1
+                    elif tipo_viz == 'D':
+                        T = T_sup if vi == 0 else T_inf
+                        b[k] -= T
+                    elif tipo_viz == 'N':
+                        if vj == 0:  # esquerda
+                            b[k] -= (dx / k_cond) * q_left
+                            A[k, k] += 1
+                        elif vj == n - 1:  # direita
+                            b[k] -= (dx / k_cond) * q_right
+                            A[k, k] += 1
+
+
+    # Converter para CSR e resolver
+    A_csr = A.tocsr()
+    T_resultado = spsolve(A_csr, b)
+
+    # Matriz de temperaturas
+    T_malha = np.full((n, n), np.nan)
+    for i in range(n):
+        for j in range(n):
+            tipo = malha_tipo[i, j]
+            if tipo == 'I':
+                T_malha[i, j] = T_resultado[mapa_idx[i, j]]
+            elif tipo == 'D':
+                T_malha[i, j] = T_sup if i == 0 else T_inf
+
+    return T_malha, malha_tipo
+
+# -----------------------------
+# 3. Plot
+# -----------------------------
+n = 729  # Resolução da Malha
+T_malha, malha_tipo = solver_conducao_sparse(n)
+
+masked_T = np.ma.masked_invalid(T_malha)
+masked_T_plot = np.flipud(masked_T)
+
+cmap = cm.get_cmap('plasma').copy()
+cmap.set_bad(color='white')
+
+plt.figure(figsize=(8, 6))
+mesh = plt.pcolormesh(masked_T_plot, cmap=cmap, shading='auto')
+plt.title("Distribuição de Temperatura (°C)")
+plt.xlabel("j (coluna)")
+plt.ylabel("i (linha)")
+plt.colorbar(mesh, label="Temperatura (°C)")
+plt.tight_layout()
+plt.show()
